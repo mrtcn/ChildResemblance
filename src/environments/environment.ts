@@ -1,7 +1,9 @@
 export const environment = {
+  production: true,
     firebase: {
         apiKey: "AIzaSyDtCYbg61gKFnY4YuyLtEOFB3FGqBqqJm8",
         authDomain: "child-resemblance.firebaseapp.com",
+        databaseURL: "https://child-resemblance-default-rtdb.europe-west1.firebasedatabase.app",
         projectId: "child-resemblance",
         storageBucket: "child-resemblance.appspot.com",
         messagingSenderId: "534106968791",

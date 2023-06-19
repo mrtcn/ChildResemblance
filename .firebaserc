@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "child-resemblance"
-  }
+    "default": "child-resemblance",
+    "staging": "child-resemblance"
+  },
+  "targets": {},
+  "etags": {}
 }
