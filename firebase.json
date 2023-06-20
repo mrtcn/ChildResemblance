@@ -6,18 +6,15 @@
     "rules": "storage.rules"
   },
   "hosting": {
-    "public": "public",
+    "source": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "frameworksBackend": {
+      "region": "europe-west1"
+    }
   },
   "emulators": {
     "singleProjectMode": true,
@@ -36,11 +33,11 @@
     "firestore": {
       "port": 8080
     },
-    "storage": {
-      "port": 8081
-    },
     "ui": {
       "enabled": true
+    },
+    "storage": {
+      "port": 9199
     }
   },
   "remoteconfig": {
@@ -57,9 +54,12 @@
         "firebase-debug.*.log"
       ],
       "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
       ]
     }
-  ]
+  ],
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
 }

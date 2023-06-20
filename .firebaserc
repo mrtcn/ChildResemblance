@@ -1,8 +1,15 @@
 {
   "projects": {
-    "default": "child-resemblance",
-    "staging": "child-resemblance"
+    "default": "child-resemblance"
   },
-  "targets": {},
+  "targets": {
+    "child-resemblance": {
+      "hosting": {
+        "ChildResemblance": [
+          "child-resemblance"
+        ]
+      }
+    }
+  },
   "etags": {}
 }

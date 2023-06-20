@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
 import { provideFunctions, getFunctions, connectFunctionsEmulator } from '@angular/fire/functions';
 import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,32 +35,38 @@ import { DalleService } from "./shared/services/ai-image/dalle.service";
     HttpClientModule,
     AppRoutingModule,    
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideStorage(() => {
-      const storage = getStorage();
+    provideAuth(() => {
+      console.log("provideAuth invoked");
+      const auth = getAuth();
       if(!environment.production)
-        connectStorageEmulator(storage, "127.0.0.1", 8081);
-      return storage;
+        connectAuthEmulator(auth, "http://localhost:9099", { disableWarnings: true });
+      return auth;
     }),
     provideFirestore(() => {
+      console.log("provideFirestore invoked");
       const firestore = getFirestore();
       if(!environment.production)
         connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
       return firestore;
-    }),    
-    provideAuth(() => {
-      const auth = getAuth();
-      if(!environment.production)
-        connectAuthEmulator(auth, "http://127.0.0.1:9099");
-      return auth;
     }),
     provideFunctions(() => {
+      console.log("provideFunctions invoked");
       const funcs = getFunctions();
       if(!environment.production)
         connectFunctionsEmulator(funcs, "127.0.0.1", 5001);
       return funcs;
     }),
-    AngularFireStorageModule,
-    AngularFireDatabaseModule,
+    provideStorage(() => {
+      console.log("provideStorage invoked");
+      const storage = getStorage();
+      if(!environment.production)
+        connectStorageEmulator(storage, "127.0.0.1", 9199);
+      return storage;
+    }),
+    provideRemoteConfig(() => {
+      console.log("provideRemoteConfig invoked");
+      return getRemoteConfig();
+    }),
   ],
   providers: [AuthService, DalleService],
   bootstrap: [AppComponent]
