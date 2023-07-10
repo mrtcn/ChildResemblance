@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {getStorage, ref, uploadBytes} from '@angular/fire/storage';
+import {getStorage, ref, uploadBytes, Storage} from '@angular/fire/storage';
 import { AuthService } from '../../shared/services/auth.service';
 import { DalleService } from 'src/app/shared/services/ai-image/dalle.service';
 @Component({
@@ -17,7 +17,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    public aiImageService: DalleService) 
+    public aiImageService: DalleService,
+    public storage: Storage) 
   {
   }
   ngOnInit(): void {}
@@ -46,10 +47,8 @@ export class DashboardComponent implements OnInit {
 	}  
   async uploadImage() {
     var img = this.file as File;
-
-    const storage = getStorage();
     const imgPath = this.authService.afAuth.currentUser?.uid + ".png";
-    const imageRef = ref(storage, imgPath);
+    const imageRef = ref(this.storage, imgPath);
 
     uploadBytes(imageRef, img).then(async (snapshot) => {
       console.log("snapshot: " + JSON.stringify(snapshot))

@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, connectAuthEmulator, getAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore, connectFirestoreEmulator } from '@angular/fire/firestore';
-import { provideFunctions, getFunctions, connectFunctionsEmulator } from '@angular/fire/functions';
-import { provideStorage, getStorage, connectStorageEmulator } from '@angular/fire/storage';
+import { provideFunctions, getFunctions, connectFunctionsEmulator, FunctionsModule } from '@angular/fire/functions';
+import { provideStorage, getStorage, connectStorageEmulator, StorageModule } from '@angular/fire/storage';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -33,7 +33,9 @@ import { DalleService } from "./shared/services/ai-image/dalle.service";
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,    
+    AppRoutingModule,
+    FunctionsModule,
+    StorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => {
       console.log("provideAuth invoked");

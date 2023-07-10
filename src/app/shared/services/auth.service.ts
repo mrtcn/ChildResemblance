@@ -1,4 +1,4 @@
-import { Injectable, NgZone, inject } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { User as usr } from '../services/user';
 import { Auth, authState, sendEmailVerification, GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword, signInWithPopup, User } from '@angular/fire/auth';
 import { doc, setDoc, DocumentReference, Firestore } from '@angular/fire/firestore';

@@ -3,7 +3,6 @@ export const environment = {
   firebase: {
     projectId: 'child-resemblance',
     appId: '1:534106968791:web:d41b3a7d47b667dd9c1692',
-    databaseURL: 'https://child-resemblance-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'child-resemblance.appspot.com',
     locationId: 'europe-west',
     apiKey: 'AIzaSyDtCYbg61gKFnY4YuyLtEOFB3FGqBqqJm8',
